@@ -1,0 +1,7 @@
+asdasdasdcommand,Expected result,Got result
+ATI,OK,OK
+AT+GMI,OK,Error
+AT+GMM,OK,OK
+AT+GMR,OK,OK
+AT+GMR,OK,Error
+AT+CGMI,OK,OK

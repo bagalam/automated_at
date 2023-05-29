@@ -5,7 +5,7 @@ from modules import rw_file
 def prGreen(skk): print("\033[92m {}\033[00m" .format(skk))
 def prRed(skk): print("\033[91m {}\033[00m" .format(skk))
 
-def test_cmd(commands, channel, dev_name):
+def test_cmd(commands, channel, dev_name, modem_row):
     passed = 0
     errors = 0
     rows = []
@@ -35,7 +35,7 @@ def test_cmd(commands, channel, dev_name):
                         break
         except:
             break
-    rw_file.write_to_file(rows, dev_name)
+    rw_file.write_to_file(rows, dev_name, modem_row)
     prGreen(f"Tests passed: {passed}")
     prRed(f"Tests not passed: {errors}")
     print(f"Total commands: {passed+errors}")

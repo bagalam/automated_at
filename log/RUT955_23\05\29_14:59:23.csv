@@ -1,0 +1,5 @@
+Modem name: Quectel
+Modem model: EC25-EU
+command,Expected result,Got result
+ATI,OK,OK
+AT+GMI,OK,OK
