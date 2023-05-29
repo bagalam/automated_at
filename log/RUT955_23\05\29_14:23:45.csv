@@ -1,0 +1,13 @@
+command,Expected result,Got result
+ATI,OK,OK
+ATI,OK,Error
+AT+GMI,OK,OK
+AT+GMM,OK,OK
+AT+GMM,OK,Error
+AT+GMR,OK,OK
+AT+CGMI,OK,OK
+AT+CGMM,OK,OK
+AT+CGMM,OK,Error
+AT+CGMR,OK,OK
+AT+GSN,OK,OK
+AT+CGSN,OK,Error

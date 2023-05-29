@@ -1,5 +1,9 @@
 import time
+import colorama
 from modules import rw_file
+
+def prGreen(skk): print("\033[92m {}\033[00m" .format(skk))
+def prRed(skk): print("\033[91m {}\033[00m" .format(skk))
 
 def test_cmd(commands, channel, dev_name):
     passed = 0
@@ -32,4 +36,6 @@ def test_cmd(commands, channel, dev_name):
         except:
             break
     rw_file.write_to_file(rows, dev_name)
-    print(f"Tests passed: {passed}\nTests not passed: {errors}\nTotal commands: {passed+errors}")
+    prGreen(f"Tests passed: {passed}")
+    prRed(f"Tests not passed: {errors}")
+    print(f"Total commands: {passed+errors}")
