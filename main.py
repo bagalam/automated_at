@@ -8,26 +8,30 @@ from modules import modem
 def main():
     ssh_client = ssh_connection.connect()
 
-    stdin, stdout, sterr = ssh_client.exec_command("cat /proc/sys/kernel/hostname")
-    stdin.close()
-    dev_name = stdout.read().decode().strip()
+    if(ssh_client != False):
 
-    modem_name, modem_model = modem.get_modem(ssh_client)
-    modem_row = {f"Modem name: {modem_name}Modem model: {modem_model}"}
+        stdin, stdout, sterr = ssh_client.exec_command("cat /proc/sys/kernel/hostname")
+        stdin.close()
+        dev_name = stdout.read().decode().strip()
 
-    stdin, stdout, sterr = ssh_client.exec_command("/etc/init.d/gsmd stop")
-    stdin.close()
+        modem_name, modem_model = modem.get_modem(ssh_client)
+        modem_row = {f"Modem name: {modem_name}Modem model: {modem_model}"}
 
-    print(f"Product being tested: {dev_name}")
+        stdin, stdout, sterr = ssh_client.exec_command("/etc/init.d/gsmd stop")
+        stdin.close()
 
-    time.sleep(5)
-    commands, channel = device_check.check_device(dev_name, ssh_client)
+        print(f"Product being tested: {dev_name}")
 
-    cmd_test.test_cmd(commands, channel, dev_name, modem_row)
+        time.sleep(5)
+        commands, channel = device_check.check_device(dev_name, ssh_client)
 
-    stdin, stdout, sterr = ssh_client.exec_command("/etc/init.d/gsmd start")
-    stdin.close()
-    ssh_client.close()
+        cmd_test.test_cmd(commands, channel, dev_name, modem_row)
+
+        stdin, stdout, sterr = ssh_client.exec_command("/etc/init.d/gsmd start")
+        stdin.close()
+        ssh_client.close()
+    else:
+        print("Could not connect to device")
 
 if __name__ == "__main__":
     main()
