@@ -1,0 +1,3 @@
+Modem name: Modem model: command,Expected result,Got result
+ATI,OK,Error
+AT&W,OK,OK
