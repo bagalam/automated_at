@@ -1,49 +1,56 @@
 import time
 from modules import rw_file
-
-def prGreen(skk): print("\033[92m {}\033[00m" .format(skk))
-def prRed(skk): print("\033[91m {}\033[00m" .format(skk))
+from modules import console_write
+from modules import modem
+from modules import device_check
 
 def check_output(out_lines, tests, rows, command):
     if out_lines[-2] == "OK":
-        result = out_lines[-2]
+        result = "OK"
         tests[0] += 1
     else:
         result = "Error"
         tests[1] += 1
 
-    print(f"{command} {result}")
+    console_write.print_current(command, result, tests)
     row = {"command":command, "Expected result":"OK", "Got result":result}
     rows.append(row)
 
 def receive(channel, command, rows, tests):
     while True:
-                if channel.recv_ready():
-                    output = channel.recv(1024)
+        if channel.recv_ready():
+            output = channel.recv(1024)
 
-                    out_lines = output.decode().splitlines()
-                    check_output(out_lines, tests, rows, command)
-                        
-                else:
-                    time.sleep(0.5)
-                    if not(channel.recv_ready()):
-                        break
-    
+            out_lines = output.decode().splitlines()
+            check_output(out_lines, tests, rows, command)
+                
+        else:
+            time.sleep(0.5)
+            if not(channel.recv_ready()):
+                break
 
-def test_cmd(commands, channel, dev_name, modem_row):
+
+def test_cmd(ssh_client):
     tests= [0,0]
     rows = []
 
+    stdin, stdout, sterr = ssh_client.exec_command("cat /proc/sys/kernel/hostname")
+    stdin.close()
+    dev_name = stdout.read().decode().strip()
+
+    print(f"Product being tested: {dev_name}")
+
+    time.sleep(1)
+    commands, channel = device_check.check_device_ssh(dev_name, ssh_client)
+
     for command in commands:
-        print(command)
         try:
             channel.send("$>" + command + "\n")
             receive(channel, command, rows, tests)
         except:
             break
-
+    channel.send('\x03')
+    modem_row = modem.get_modem_ssh(channel)
     rw_file.write_to_file(rows, dev_name, modem_row)
 
-    prGreen(f"Tests passed: {tests[0]}")
-    prRed(f"Tests not passed: {tests[1]}")
-    print(f"Total commands: {tests[0]+tests[1]}")
+    console_write.print_tests(tests)

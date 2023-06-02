@@ -1,0 +1,23 @@
+Modem name: gsmctl -w
+Syntax: /etc/init.d/gsmd [command]
+
+Available commands:
+	start           Start the service
+	stop            Stop the service
+	restart         Restart the service
+	reload          Reload configuration files (or restart if service does not implement reload)
+	enable          Enable service autostart
+	disable         Disable service autostart
+	enabled         Check if service is started on boot
+	running         Check if service is running
+	status          Service status
+	trace           Start with syscall trace
+
+root@RUT955:~# Modem model: gsmctl -m
+[handle_requests:228] error: Failed to handle detailed modem info gather.
+root@RUT955:~# command,Expected result,Got result
+ATI,OK,Error
+ATI,OK,OK
+AT+GMI,OK,OK
+AT+GMM,OK,OK
+AT+GMR,OK,OK

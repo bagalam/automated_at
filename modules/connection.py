@@ -22,17 +22,10 @@ def connect_ser():
         time.sleep(1)
         ser.write(b'Admin123\r')
 
-        time.sleep(2)
-        ser.write(b'ls /etc \r')
-        #ser.flush()
-
         time.sleep(1)
         output = ser.read(10000).decode('utf-8', 'ignore')
-        print(output)
 
-        time.sleep(1)
-        ser.write(b'exit\r')
-        print("Connected to device")
+        print(output)
 
         return ser
     except:

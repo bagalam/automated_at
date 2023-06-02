@@ -1,0 +1,5 @@
+Modem name: root@RUT955:~# gsmctl -wModem model: gsmctl -mcommand,Expected result,Got result
+ATI,OK,OK
+AT+GMI,OK,OK
+AT+GMM,OK,OK
+AT+GMR,OK,Error

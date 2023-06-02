@@ -1,0 +1,10 @@
+Modem name: gsmctl -w
+Quectel
+root@RUT955:~# Modem model: gsmctl -m
+EC25-EU
+root@RUT955:~# command,Expected result,Got result
+ATI,OK,Error
+ATI,OK,OK
+ATI,OK,Error
+AT+GMI,OK,OK
+AT+GMM,OK,OK

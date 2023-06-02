@@ -1,0 +1,1 @@
+Modem name: root@RUT955:~# gsmctl -wModem model: root@RUT955:~# gsmctl -mcommand,Expected result,Got result

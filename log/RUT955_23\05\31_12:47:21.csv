@@ -1,4 +1,0 @@
-Modem name: Modem model: command,Expected result,Got result
-ATI,OK,Error
-AT+GMI,OK,OK
-AT&V,OK,OK

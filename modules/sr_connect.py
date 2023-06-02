@@ -16,6 +16,7 @@ def connect():
 
     time.sleep(1)
     ser.write(b'ls /etc\r')
+    ser.in_waiting()
 
     time.sleep(1)
     output = ser.read(100).decode('utf-8', 'ignore')

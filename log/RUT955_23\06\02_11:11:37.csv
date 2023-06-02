@@ -1,8 +1,6 @@
-modem name: Quectel
-
- modem model: EC25-EU
+Modem name: gsmctl -w
+Modem model: gsmctl -m
 command,Expected result,Got result
 ATI,OK,OK
-ATI,OK,Error
 AT+GMI,OK,OK
 AT+GMM,OK,Error

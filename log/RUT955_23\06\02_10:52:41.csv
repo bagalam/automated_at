@@ -1,12 +1,12 @@
-command,Expected result,Got result
+Modem name: Modem model: command,Expected result,Got result
 ATI,OK,OK
-AT+GMI,OK,OK
+AT+GMI,OK,Error
 AT+GMM,OK,OK
 AT+GMR,OK,OK
-AT+CGMI,OK,OK
+AT+CGMI,OK,Error
 AT+CGMM,OK,OK
 AT+CGMR,OK,OK
-AT+GSN,OK,OK
+AT+GSN,OK,Error
 AT+CGSN,OK,OK
 AT&F,OK,OK
 AT&V,OK,OK

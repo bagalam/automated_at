@@ -1,4 +1,6 @@
+Modem name: m Modem model: s
 command,Expected result,Got result
+AT+QCSQ=0,OK,OK
 ATI,OK,OK
 AT+GMI,OK,OK
 AT+GMM,OK,OK

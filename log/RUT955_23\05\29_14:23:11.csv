@@ -1,7 +1,0 @@
-command,Expected result,Got result
-ATI,OK,Error
-AT+GMI,OK,OK
-AT+GMM,OK,OK
-AT+GMR,OK,Error
-AT+CGMI,OK,OK
-AT+CGMM,OK,OK
