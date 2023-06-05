@@ -1,3 +1,6 @@
+import sys
+sys.dont_write_bytecode = True
+
 import csv
 import json
 import os
@@ -24,9 +27,9 @@ def get_commands(name):
     
     with open(cmd_path, "r") as read_file:
         command_file = json.load(read_file)
-    if "RUT9" in name:
+    if "RUT9" or "rut9" in name:
         return command_file["RUT9"]
-    elif "RUTX" in name:
+    elif "RUTX" or "rutx" in name:
         return command_file["RUTX"]
     else:
         return False

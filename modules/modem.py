@@ -1,3 +1,6 @@
+import sys
+sys.dont_write_bytecode = True
+
 import time
 
 
@@ -5,7 +8,7 @@ def get_modem_ssh(channel):
 
     try:
         channel.send("/etc/init.d/gsmd start\n")
-        time.sleep(3)
+        time.sleep(2)
         channel.recv(1024)
         channel.send("gsmctl -w\n")
         time.sleep(1)
@@ -34,8 +37,8 @@ def get_modem_ser(ser_client):
         time.sleep(1)
         ser_client.write(b'/etc/init.d/gsmd start\r')
         time.sleep(1)
-        ser_client.read(100)
-        time.sleep(3)
+        ser_client.reset_input_buffer()
+        time.sleep(1)
         ser_client.write(b'gsmctl -w\r')
         time.sleep(1)
         lines = ser_client.read(100).decode('utf-8', 'ignore').splitlines()

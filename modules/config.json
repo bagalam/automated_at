@@ -1,7 +1,6 @@
 {
     "RUT9":
         [
-            "AT+QCSQ=0",
             "ATI",
             "AT+GMI",
             "AT+GMM",

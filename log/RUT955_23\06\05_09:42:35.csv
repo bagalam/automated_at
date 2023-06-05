@@ -1,13 +1,19 @@
-Modem name: QuectelModem model: EC25-EUcommand,Expected result,Got result
+Modem name: Quectel
+Modem model: EC25-EU
+command,Expected result,Got result
+AT+QCSQ=0,OK,Error
+ATI,OK,OK
 ATI,OK,Error
 AT+GMI,OK,Error
 AT+GMM,OK,OK
+AT+GMM,OK,Error
 AT+GMR,OK,OK
-AT+GMR,OK,Error
+AT+CGMI,OK,OK
 AT+CGMI,OK,Error
 AT+CGMM,OK,Error
-AT+CGMR,OK,OK
+AT+CGMR,OK,Error
 AT+GSN,OK,OK
+AT+GSN,OK,Error
 AT+CGSN,OK,OK
 AT+CGSN,OK,Error
 AT&F,OK,OK

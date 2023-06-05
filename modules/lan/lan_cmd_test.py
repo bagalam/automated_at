@@ -1,8 +1,11 @@
+import sys
+sys.dont_write_bytecode = True
+
 import time
 from modules import rw_file
 from modules import console_write
 from modules import modem
-from modules import device_check
+from modules import connect_modem
 
 def check_output(out_lines, tests, rows, command):
     if out_lines[-2] == "OK":
@@ -30,18 +33,14 @@ def receive(channel, command, rows, tests):
                 break
 
 
-def test_cmd(ssh_client):
+def test_cmd(ssh_client, dev_name):
     tests= [0,0]
     rows = []
-
-    stdin, stdout, sterr = ssh_client.exec_command("cat /proc/sys/kernel/hostname")
-    stdin.close()
-    dev_name = stdout.read().decode().strip()
 
     print(f"Product being tested: {dev_name}")
 
     time.sleep(1)
-    commands, channel = device_check.check_device_ssh(dev_name, ssh_client)
+    commands, channel = connect_modem.check_device_ssh(dev_name, ssh_client)
 
     for command in commands:
         try:

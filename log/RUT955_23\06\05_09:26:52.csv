@@ -1,0 +1,33 @@
+Modem name: Could not get modem name Modem model: Could not get modem model
+command,Expected result,Got result
+AT+QCSQ=0,OK,Error
+AT+QCSQ=0,OK,Error
+ATI,OK,OK
+AT+GMI,OK,OK
+AT+GMM,OK,OK
+AT+GMM,OK,Error
+AT+GMR,OK,Error
+AT+CGMI,OK,Error
+AT+CGMM,OK,OK
+AT+CGMM,OK,Error
+AT+CGMR,OK,Error
+AT+GSN,OK,Error
+AT+CGSN,OK,OK
+AT&F,OK,OK
+AT&V,OK,OK
+AT&W,OK,OK
+ATZ,OK,OK
+ATQ,OK,OK
+ATV1,OK,OK
+ATE0,OK,OK
+A/,OK,OK
+ATS3?,OK,OK
+ATS4?,OK,OK
+ATS5?,OK,OK
+ATX,OK,OK
+AT+CFUN=?,OK,OK
+AT+CPIN=?,OK,OK
+AT+CMEE=?,OK,OK
+AT+CSCS=?,OK,OK
+AT+QURCCFG=?,OK,OK
+AT&C,OK,OK
