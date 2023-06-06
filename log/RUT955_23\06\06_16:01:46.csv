@@ -1,0 +1,5 @@
+Modem name: 
+Modem model: 
+command,Expected result,Got result
+ATI,OK,OK
+AT+GMI,OK,OK

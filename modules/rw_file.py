@@ -6,8 +6,6 @@ import json
 import os
 import datetime
 
-from modules import modem
-
 def write_to_file(rows, name, modem_row):
     date = datetime.datetime.now()
     date = date.strftime(f"%y\%m\%d_%X")
@@ -31,5 +29,7 @@ def get_commands(name):
         return command_file["RUT9"]
     elif "RUTX" or "rutx" in name:
         return command_file["RUTX"]
+    elif "TRM2" or "trm2" in name:
+        return command_file["TRM2"]
     else:
         return False

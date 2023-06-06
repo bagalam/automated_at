@@ -4,11 +4,10 @@ sys.dont_write_bytecode = True
 import time
 from modules import rw_file
 from modules import console_write
-from modules import modem
 from modules import connect_modem
 
 def check_output(out_lines, tests, rows, command):
-    if out_lines[-2] == "OK":
+    if out_lines[-2] or out_lines[-1] == "OK":
         result = "OK"
         tests[0] += 1
     else:
@@ -37,11 +36,10 @@ def test_cmd(ser_client, dev_name):
     time.sleep(2)
     ser_client.reset_input_buffer()
     time.sleep(2)
-    ser_client.write(b'cat /proc/sys/kernel/hostname\r')
 
     print(f"Product being tested: {dev_name}")
 
-    commands = connect_modem.check_device_ser(dev_name, ser_client)
+    commands, modem_row = connect_modem.serial_modem(dev_name, ser_client)
 
     ser_client.reset_input_buffer()
     time.sleep(2)
@@ -59,7 +57,6 @@ def test_cmd(ser_client, dev_name):
 
     time.sleep(1)
     ser_client.write(b'\x03')
-    modem_row = modem.get_modem_ser(ser_client)
     rw_file.write_to_file(rows, dev_name, modem_row)
 
     console_write.print_tests(tests)

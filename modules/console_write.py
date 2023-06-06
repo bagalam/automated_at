@@ -16,4 +16,4 @@ def print_current(command, result, tests):
     print(prGreen(f'Tests passed: {tests[0]}'))
     print(prRed(f'Tests not passed: {tests[1]}'))
     #print(end=LINE_CLEAR)
-    print(2*(CURSOR_UP + LINE_CLEAR)+ CURSOR_UP, end="")
+    print(3*(CURSOR_UP + LINE_CLEAR), end="")
