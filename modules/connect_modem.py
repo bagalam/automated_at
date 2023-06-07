@@ -34,7 +34,6 @@ def serial_modem_name(ser_client, name):
         if "TRM2" in name or "trm2" in name:
             modem_name = lines[0]
             modem_model = lines[1]
-            print(lines)
         else:
             modem_name = lines[2]
             modem_model = lines[3]
@@ -71,9 +70,7 @@ def serial_modem(name, ser_client):
         print("Device not suported")
     else:
         if "TRM2" in name or "trm2" in name:
-            print("cia1")
             modem_row = serial_modem_name(ser_client, name)
-            print(modem_row)
             return commands, modem_row
         else:
             time.sleep(1)
