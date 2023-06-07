@@ -21,7 +21,7 @@ def check_output(out_lines, tests, rows, command):
 def receive(ser_client, command, rows, tests):
     while True:
         time.sleep(1)
-        out_lines = ser_client.read(200).decode('utf-8', 'ignore').splitlines()
+        out_lines = ser_client.read(1000).decode('utf-8', 'ignore').splitlines()
         if out_lines:
             check_output(out_lines, tests, rows, command)
         else:

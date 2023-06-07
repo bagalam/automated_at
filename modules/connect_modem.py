@@ -24,15 +24,20 @@ def lan_modem_name(channel):
         return modem_row
 
 
-def serial_modem_name(ser_client):
+def serial_modem_name(ser_client, name):
     try:
         ser_client.reset_input_buffer()
         time.sleep(1)
         ser_client.write(b'ATI\r')
         time.sleep(1)
         lines = ser_client.read(100).decode('utf-8', 'ignore').splitlines()
-        modem_name = lines[2]
-        modem_model = lines[3]
+        if "TRM2" in name or "trm2" in name:
+            modem_name = lines[0]
+            modem_model = lines[1]
+            print(lines)
+        else:
+            modem_name = lines[2]
+            modem_model = lines[3]
         modem_row = {f"Modem name: {modem_name}\nModem model: {modem_model}\n"}
 
         return modem_row
@@ -65,8 +70,10 @@ def serial_modem(name, ser_client):
     if(commands == False):
         print("Device not suported")
     else:
-        if "TRM2" or "trm2" in name:
-            modem_row = serial_modem_name(ser_client)
+        if "TRM2" in name or "trm2" in name:
+            print("cia1")
+            modem_row = serial_modem_name(ser_client, name)
+            print(modem_row)
             return commands, modem_row
         else:
             time.sleep(1)
