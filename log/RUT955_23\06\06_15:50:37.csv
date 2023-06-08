@@ -1,4 +1,0 @@
-Modem name: 
-Modem model: 
-command,Expected result,Got result
-AT+CGMM,OK,OK

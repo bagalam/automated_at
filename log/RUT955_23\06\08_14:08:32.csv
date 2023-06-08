@@ -1,0 +1,3 @@
+Modem name: Could not get modem name Modem model: Could not get modem model
+command,Expected result,Got result
+AT+GMM,OK,OK

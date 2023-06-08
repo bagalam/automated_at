@@ -2,9 +2,9 @@ import sys
 sys.dont_write_bytecode = True
 
 import time
-from modules import rw_file
+from modules.file_modules import write_csv_file
 from modules import console_write
-from modules import connect_modem
+from modules.serial import serial_connect
 
 def check_output(out_lines, tests, rows, command):
     if out_lines[-2] or out_lines[-1] == "OK":
@@ -29,7 +29,7 @@ def receive(ser_client, command, rows, tests):
                         
     
 
-def test_cmd(ser_client, dev_name):
+def test_cmd(ser_client, dev_name, path):
     tests= [0,0]
     rows = []
 
@@ -39,7 +39,7 @@ def test_cmd(ser_client, dev_name):
 
     print(f"Product being tested: {dev_name}")
 
-    commands, modem_row = connect_modem.serial_modem(dev_name, ser_client)
+    commands, modem_row = serial_connect.serial_modem(dev_name, ser_client, path)
 
     ser_client.reset_input_buffer()
     time.sleep(2)
@@ -57,6 +57,6 @@ def test_cmd(ser_client, dev_name):
 
     time.sleep(1)
     ser_client.write(b'\x03')
-    rw_file.write_to_file(rows, dev_name, modem_row)
+    write_csv_file.write_to_file(rows, dev_name, modem_row)
 
     console_write.print_tests(tests)
