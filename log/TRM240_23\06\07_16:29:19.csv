@@ -1,4 +1,0 @@
-Modem name: Quectel
-Modem model: EC21
-command,Expected result,Got result
-AT+QCSQ=0,OK,OK

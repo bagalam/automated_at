@@ -1,4 +1,0 @@
-Modem name: ATI
-Modem model: 
-command,Expected result,Got result
-AT+QCSQ=0,OK,OK
