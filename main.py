@@ -22,8 +22,8 @@ def main():
         else:
             print("Could not connect to device")
     else:
-        serial_connect = importlib.import_module('modules.ssh.ssh_connect')
-        serial_cmd_test = importlib.import_module('modules.ssh.ssh_cmd_test')
+        serial_connect = importlib.import_module('modules.serial.serial_connect')
+        serial_cmd_test = importlib.import_module('modules.serial.serial_cmd_test')
 
         ser_client = serial_connect.connect(args.usb, args.baudrate)
         if(ser_client != False):

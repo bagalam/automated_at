@@ -5,7 +5,7 @@ import time
 import paramiko
 from modules.file_modules import read_config_file
 
-def lan_modem_name(channel):
+def modem_name(channel):
     try:
         channel.recv(1024)
         channel.send("ATI\n")
@@ -25,7 +25,7 @@ def lan_modem_name(channel):
         return modem_row
 
 
-def lan_modem(name, ssh_client, path):
+def modem(name, ssh_client, path):
 
     commands = read_config_file.get_commands(name, path)
     if(commands == False):
@@ -38,7 +38,7 @@ def lan_modem(name, ssh_client, path):
         time.sleep(1)
         channel.send("/etc/init.d/gsmd stop\n")
         time.sleep(1)
-        modem_row = lan_modem_name(channel)
+        modem_row = modem_name(channel)
         return commands, channel, modem_row
 
 def connect(ip, user, pswd, po):

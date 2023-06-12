@@ -7,25 +7,26 @@ from modules import console_write
 from modules.serial import serial_connect
 
 def check_output(out_lines, tests, rows, command):
-    if out_lines[-2] or out_lines[-1] == "OK":
-        result = "OK"
+    if out_lines[-1] == command['excpected']:
+        passed = "Passed"
         tests[0] += 1
     else:
-        result = "Error"
+        passed = "Failed"
         tests[1] += 1
 
-    console_write.print_current(command, result, tests)
-    row = {"command":command, "Expected result":"OK", "Got result":result}
+    console_write.print_current(command, out_lines[-1], tests)
+    row = {"command":command['command'], "Expected result":command['excpected'], "Got result":out_lines[-1], "Test passed/failed": passed}
     rows.append(row)
 
 def receive(ser_client, command, rows, tests):
     while True:
         time.sleep(1)
-        out_lines = ser_client.read(1000).decode('utf-8', 'ignore').splitlines()
-        if out_lines:
-            check_output(out_lines, tests, rows, command)
+        if ser_client.inWaiting() > 0:
+            data_to_read = ser_client.inWaiting()
+            out_lines = ser_client.read(data_to_read).decode('utf-8', 'ignore').splitlines()
         else:
             break
+    check_output(out_lines, tests, rows, command)
                         
     
 
@@ -33,13 +34,9 @@ def test_cmd(ser_client, dev_name, path):
     tests= [0,0]
     rows = []
 
-    time.sleep(2)
-    ser_client.reset_input_buffer()
-    time.sleep(2)
-
     print(f"Product being tested: {dev_name}")
 
-    commands, modem_row = serial_connect.serial_modem(dev_name, ser_client, path)
+    commands, modem_row = serial_connect.modem(dev_name, ser_client, path)
 
     ser_client.reset_input_buffer()
     time.sleep(2)
@@ -47,16 +44,13 @@ def test_cmd(ser_client, dev_name, path):
     try:
         for command in commands:
             try:
-                time.sleep(1)
-                ser_client.write((command + '\r').encode())
+                ser_client.write((command['command'] + '\r').encode())
                 receive(ser_client, command, rows, tests)
             except:
                 break
     except TypeError:
         print("Could not get the commands")
 
-    time.sleep(1)
-    ser_client.write(b'\x03')
     write_csv_file.write_to_file(rows, dev_name, modem_row)
 
     console_write.print_tests(tests)

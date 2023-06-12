@@ -1,0 +1,15 @@
+Modem name: Quectel
+Modem model: EC25
+command,Expected result,Got result,Test passed/failed
+ATI,OK,,Passed
+AT+GMI,OK,,Passed
+AT+GMM,OK,,Passed
+AT+GMR,OK,,Passed
+AT+CGMI,OK,,Passed
+AT+CGMM,OK,,Passed
+AT+CGMR,OK,,Passed
+AT+GSN,OK,,Passed
+AT+CGSN,OK,,Passed
+AT&F,OK,,Passed
+AT&V,OK,,Passed
+AT&W,OK,,Passed

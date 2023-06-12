@@ -1,0 +1,71 @@
+Modem name: Quectel
+Modem model: EC25
+command,Expected result,Got result,Test passed/failed
+ATI,OK,,Passed
+AT+GMI,OK,,Passed
+AT+GMM,OK,,Passed
+AT+GMR,OK,,Passed
+AT+CGMI,OK,,Passed
+AT+CGMM,OK,,Passed
+AT+CGMR,OK,,Passed
+AT+GSN,OK,,Passed
+AT+CGSN,OK,,Passed
+AT&F,OK,,Passed
+AT&V,OK,,Passed
+AT&W,OK,,Passed
+ATZ,OK,,Passed
+ATQ,OK,,Passed
+ATV1,OK,,Passed
+ATE0,OK,,Passed
+A/,OK,,Passed
+ATS3?,OK,,Failed
+ATS4?,OK,,Failed
+ATS5?,OK,,Failed
+ATX,OK,,Passed
+AT+CFUN=?,OK,,Passed
+AT+CPIN=?,OK,,Passed
+AT+CMEE=?,OK,,Passed
+AT+CSCS=?,OK,,Passed
+AT+QURCCFG=?,OK,,Passed
+AT&C,OK,,Passed
+AT&D,OK,,Passed
+AT+IFC=?,OK,,Passed
+AT+ICF=?,OK,,Passed
+AT+IPR=?,OK,,Passed
+AT+CPAS=?,OK,,Passed
+AT+CEER=?,OK,,Passed
+AT+QCFG=?,OK,"+QCFG: ""usbcfg"",<vid>,<pid>,<diag>,<nmea>,<at_port>,<modem>,<rmnet>,<adb>,<uac>",Passed
+AT+QCFG=?,OK,"+QCFG: ""amrcodec"",(0-255)",Passed
+AT+QCFG=?,OK,"+QCFG: ""urc/smd"",(0-4),(0,1)",Passed
+AT+QCFG=?,OK,"+QCFG: ""sarcfg"",(""lte_wcdma"",""gsm""),max_power,row_grads,column_grads",Passed
+AT+QCFG=?,OK,"+QCFG: ""ping/ri"",(0-1),(0-1)",Passed
+AT+QCFG=?,OK,,Passed
+AT+CIMI=?,OK,,Passed
+AT+CLCK=?,OK,,Passed
+AT+CPWD=?,OK,,Passed
+AT+CSIM=?,OK,,Passed
+AT+CRSM=?,OK,,Passed
+AT+QCCID=?,OK,,Passed
+AT+QPINC=?,OK,,Passed
+AT+QSIMDET=?,OK,,Passed
+AT+QSIMSTAT=?,OK,,Passed
+AT+CREG=?,OK,,Passed
+AT+CSQ=?,OK,,Passed
+AT+CPOL=?,OK,,Failed
+AT+COPN=?,OK,,Passed
+AT+CTZU=?,OK,,Passed
+AT+CTZR=?,OK,,Passed
+AT+QNWINFO=?,OK,,Passed
+ATA,OK,,Failed
+AT+CVHU=?,OK,,Passed
+AT+CHUP=?,OK,,Passed
+ATS0?,OK,,Passed
+ATS6?,OK,,Failed
+ATS7?,OK,,Failed
+ATS8?,OK,,Failed
+ATS10?,OK,,Failed
+AT+CBST=?,OK,,Passed
+AT+CSTA=?,OK,,Passed
+AT+CLCC=?,OK,,Passed
+AT+CR=?,OK,,Passed
+AT+CRC=?,OK,,Passed
