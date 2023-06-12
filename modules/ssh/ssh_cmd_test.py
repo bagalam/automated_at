@@ -7,15 +7,15 @@ from modules.ssh import ssh_connect
 from modules.file_modules import write_csv_file
 
 def check_output(out_lines, tests, rows, command):
-    if out_lines[-2] == "OK":
-        result = "OK"
+    if out_lines[-2] == command['excpected']:
+        passed = "Passed"
         tests[0] += 1
     else:
-        result = "Error"
+        passed = "Failed"
         tests[1] += 1
 
-    console_write.print_current(command, result, tests)
-    row = {"command":command, "Expected result":"OK", "Got result":result}
+    console_write.print_current(command, out_lines[-2], tests)
+    row = {"command":command['command'], "Expected result":command['excpected'], "Got result":out_lines[-2], "Test passed/failed": passed}
     rows.append(row)
 
 def receive(channel, command, rows, tests):
@@ -42,12 +42,12 @@ def test_cmd(ssh_client, dev_name, path):
     commands, channel, modem_row = ssh_connect.lan_modem(dev_name, ssh_client, path)
 
     for command in commands:
-        #try:
-            channel.send("$>" + command + "\n")
+        try:
+            channel.send("$>" + command['command'] + "\n")
             receive(channel, command, rows, tests)
-        #except:
-            #break
+        except:
+            break
     channel.send('\x03')
     write_csv_file.write_to_file(rows, dev_name, modem_row)
-
+    channel.send("/etc/init.d/gsmd start\n")
     console_write.print_tests(tests)

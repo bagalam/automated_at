@@ -1,19 +1,20 @@
 import sys
+import os
 sys.dont_write_bytecode = True
 
 from modules import flags
-from modules.ssh import ssh_connect
-from modules.serial import serial_connect
-from modules.ssh import ssh_cmd_test
-from modules.serial import serial_cmd_test
 
+import importlib
 
 def main():
     args = flags.flags()
     
 
     if args.hostname:
-        ssh_client = ssh_connect.connect(args.hostname, args.username, args.password, args.port)
+        ssh_module = importlib.import_module('modules.ssh.ssh_connect')
+        ssh_cmd_test = importlib.import_module('modules.ssh.ssh_cmd_test')
+
+        ssh_client = ssh_module.connect(args.hostname, args.username, args.password, args.port)
         if(ssh_client != False):
             ssh_cmd_test.test_cmd(ssh_client, args.name, args.path)
 
@@ -21,6 +22,9 @@ def main():
         else:
             print("Could not connect to device")
     else:
+        serial_connect = importlib.import_module('modules.ssh.ssh_connect')
+        serial_cmd_test = importlib.import_module('modules.ssh.ssh_cmd_test')
+
         ser_client = serial_connect.connect(args.usb, args.baudrate)
         if(ser_client != False):
             serial_cmd_test.test_cmd(ser_client, args.name, args.path)

@@ -12,8 +12,8 @@ def print_tests(tests):
     print(f"Total commands: {tests[0]+tests[1]}")
 
 def print_current(command, result, tests):
-    print(f"{command:<10} {result:<6}")
+    print(f"{command['command']:<10} {result:<6}")
     print(prGreen(f'Tests passed: {tests[0]}'))
-    print(prRed(f'Tests not passed: {tests[1]}'))
+    print(prRed(f'Tests failed: {tests[1]}'))
     #print(end=LINE_CLEAR)
     print(3*(CURSOR_UP + LINE_CLEAR), end="")

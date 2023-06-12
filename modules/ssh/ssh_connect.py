@@ -36,6 +36,8 @@ def lan_modem(name, ssh_client, path):
         channel.invoke_shell()
         channel.send("socat /dev/tty,raw,echo=0,escape=0x03 /dev/ttyUSB3,raw,setsid,sane,echo=0,nonblock ; stty sane\r")
         time.sleep(1)
+        channel.send("/etc/init.d/gsmd stop\n")
+        time.sleep(1)
         modem_row = lan_modem_name(channel)
         return commands, channel, modem_row
 
