@@ -10,6 +10,7 @@ path = os.path.join(current_directory, relative_path)
 
 def flags():
     parser = argparse.ArgumentParser()
+    parser.add_argument("-c","--connection", help="Chose a connection type, serial or ssh", type=str, required=True)
     parser.add_argument("-host","--hostname", help="Hostname, lan or public ip, to connect to.", type=str)
     parser.add_argument("-p","--port", help="Connection port", type=int, default=22)
     parser.add_argument("-n", "--name", help="Device name", type=str, required=True)

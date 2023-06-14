@@ -3,7 +3,7 @@ sys.dont_write_bytecode = True
 
 import time
 from modules import console_write
-from modules.ssh import ssh_connect
+from modules.ssh import connect
 from modules.file_modules import write_csv_file
 
 def check_output(out_lines, tests, rows, command):
@@ -28,7 +28,7 @@ def receive(channel, command, rows, tests):
             if not(channel.recv_ready()):
                 break
     check_output(out_lines, tests, rows, command)
-
+    
 
 def test_cmd(ssh_client, dev_name, path):
     tests= [0,0]
@@ -37,14 +37,14 @@ def test_cmd(ssh_client, dev_name, path):
     print(f"Product being tested: {dev_name}")
 
     time.sleep(1)
-    commands, channel, modem_row = ssh_connect.modem(dev_name, ssh_client, path)
+    commands, channel, modem_row = connect.modem(dev_name, ssh_client, path)
 
     for command in commands:
         try:
             channel.send("$>" + command['command'] + "\n")
             receive(channel, command, rows, tests)
         except:
-            break
+            time.sleep(5)
     channel.send('\x03')
     channel.send("/etc/init.d/gsmd start\n")
     write_csv_file.write_to_file(rows, dev_name, modem_row)

@@ -2,9 +2,10 @@ import sys
 sys.dont_write_bytecode = True
 
 import time
+import os
 from modules.file_modules import write_csv_file
 from modules import console_write
-from modules.serial import serial_connect
+from modules.serial import connect
 
 def check_output(out_lines, tests, rows, command):
     if out_lines[-1] == command['excpected']:
@@ -36,7 +37,7 @@ def test_cmd(ser_client, dev_name, path):
 
     print(f"Product being tested: {dev_name}")
 
-    commands, modem_row = serial_connect.modem(dev_name, ser_client, path)
+    commands, modem_row = connect.modem(dev_name, ser_client, path)
 
     ser_client.reset_input_buffer()
     time.sleep(2)
@@ -52,5 +53,5 @@ def test_cmd(ser_client, dev_name, path):
         print("Could not get the commands")
 
     write_csv_file.write_to_file(rows, dev_name, modem_row)
-
+    os.system("service ModemManager start")
     console_write.print_tests(tests)
