@@ -39,13 +39,19 @@ def test_cmd(ssh_client, dev_name, path):
     time.sleep(1)
     commands, channel, modem_row = connect.modem(dev_name, ssh_client, path)
 
-    for command in commands:
-        try:
-            channel.send("$>" + command['command'] + "\n")
-            receive(channel, command, rows, tests)
-        except:
-            time.sleep(5)
+    try:
+        for command in commands:
+            try:
+                channel.send("$>" + command['command'] + "\n")
+                receive(channel, command, rows, tests)
+            except KeyboardInterrupt:
+                break
+            except:
+                time.sleep(5)
+    except TypeError:
+        print("Could not get the commands")
     channel.send('\x03')
+    time.sleep(1)
     channel.send("/etc/init.d/gsmd start\n")
     write_csv_file.write_to_file(rows, dev_name, modem_row)
     console_write.print_tests(tests)

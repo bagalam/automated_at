@@ -47,8 +47,10 @@ def test_cmd(ser_client, dev_name, path):
             try:
                 ser_client.write((command['command'] + '\r').encode())
                 receive(ser_client, command, rows, tests)
-            except:
+            except KeyboardInterrupt:
                 break
+            except:
+                time.sleep(5)
     except TypeError:
         print("Could not get the commands")
 
